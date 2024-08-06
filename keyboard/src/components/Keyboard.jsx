@@ -1,4 +1,9 @@
 import React from "react";
+import Letter from "./Letter";
+import Screen from "./Screen";
+import "./keyStyle.css";
+
+/** ----------Our supported languages--------------- */
 const English = [
   "a",
   "b",
@@ -56,37 +61,25 @@ const Hebrew = [
   "ף",
   "ץ",
 ];
-
+/**------------Createing letter & push it into Screen---------- */
+function createLetter(letter) {
+  const what = <Letter letter={letter} color={color} fontSize={fontSize} />;
+}
+/**-----------Keyboard component-------------------------- */
 const KeyBord = (props) => {
-  let lenguege = props.lenguege;
-  lenguege === "English" ? (lenguege = English) : (English = Hebrew);
+  let color = "black";
+  let fontSize = "20";
+  let lenguege =
+    props.lenguege === "English" ? (lenguege = English) : (English = Hebrew);
+
   return (
-    <div
-      id="keyboard"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(40px, 1fr))",
-        gap: "5px",
-        padding: "10px",
-      }}>
+    <div id="keyboard">
       {lenguege.map((letter) => (
         <div
           key={letter}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            border: "1px solid black",
-            padding: "10px",
-            textAlign: "center",
-            cursor: "pointer",
-            borderRadius: "5px",
-            backgroundColor: "#f0f0f0",
-            fontSize: "16px",
-          }}
-          onClick={() => {
-            // פעולה בעת לחיצה על אות
-            console.log(`Clicked on: ${letter}`);
+          className="letter"
+          onClick={(letter) => {
+            createLetter(letter);
           }}>
           {letter}
         </div>
