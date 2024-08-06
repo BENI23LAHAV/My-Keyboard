@@ -1,4 +1,5 @@
 import React from "react";
+import "./keyStyle.css";
 const English = [
   "a",
   "b",
@@ -61,29 +62,11 @@ const KeyBord = (props) => {
   let lenguege = props.lenguege;
   lenguege === "English" ? (lenguege = English) : (English = Hebrew);
   return (
-    <div
-      id="keyboard"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(40px, 1fr))",
-        gap: "5px",
-        padding: "10px",
-      }}>
+    <div id="keyboard">
       {lenguege.map((letter) => (
         <div
           key={letter}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            border: "1px solid black",
-            padding: "10px",
-            textAlign: "center",
-            cursor: "pointer",
-            borderRadius: "5px",
-            backgroundColor: "#f0f0f0",
-            fontSize: "16px",
-          }}
+          className="letter"
           onClick={() => {
             // פעולה בעת לחיצה על אות
             console.log(`Clicked on: ${letter}`);
