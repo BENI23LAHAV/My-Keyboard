@@ -17,11 +17,16 @@ const Screen = () => {
     history.push(message);
   }
   console.log(history);
+  function undo() {
+    setMessage(history[history.length-1]);
+    history.pop();
+  }
   return (
     <div>
       <h2>Screen</h2>
       <p>{message}</p>
       <KeyBord lenguege={"English"} showLetter={createNewLetter} />
+      <button onClick={undo}>undo</button>
     </div>
   );
 };
