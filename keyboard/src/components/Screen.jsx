@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Letter from "./Letter";
 import KeyBord from "./Keyboard";
 let counter = 0;
+const history = [];
 const Screen = () => {
   const [message, setMessage] = useState([]);
-  function createNewLetter(letter, color, fontSize) {
-    setMessage( old => [...old, 
+ function createNewLetter(letter, color, fontSize) {
+     setMessage( old => [...old, 
       <Letter
         letter={letter}
         color={color}
@@ -13,14 +14,13 @@ const Screen = () => {
         key={counter++}
       />,
     ]);
+    history.push(message);
   }
-
-  // createNewLetter("a", "red", 26);
-  // createNewLetter("A", "black", 12);
+  console.log(history);
   return (
     <div>
       <h2>Screen</h2>
-      {message}
+      <p>{message}</p>
       <KeyBord lenguege={"English"} showLetter={createNewLetter} />
     </div>
   );
