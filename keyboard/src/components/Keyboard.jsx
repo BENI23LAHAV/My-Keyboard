@@ -31,6 +31,7 @@ const English = [
   "x",
   "y",
   "z",
+  "_",
 ];
 const Hebrew = [
   "א",
@@ -60,17 +61,19 @@ const Hebrew = [
   "ן",
   "ף",
   "ץ",
+  " ",
 ];
 /**------------Createing letter & push it into Screen---------- */
-function createLetter(letter) {
+function createLetter(letter, color, fontSize) {
   const what = <Letter letter={letter} color={color} fontSize={fontSize} />;
 }
 /**-----------Keyboard component-------------------------- */
 const KeyBord = (props) => {
+  const createLetter2 = props.showLetter;
+
   let color = "black";
   let fontSize = "20";
-  let lenguege =
-    props.lenguege === "English" ? (lenguege = English) : (English = Hebrew);
+  let lenguege = props.lenguege === "English" ? English : Hebrew;
 
   return (
     <div id="keyboard">
@@ -78,9 +81,11 @@ const KeyBord = (props) => {
         <div
           key={letter}
           className="letter"
-          onClick={(letter) => {
-            createLetter(letter);
-          }}>
+          onClick={(event, color, fontSize) => {
+            createLetter2(event.target.innerText, color, fontSize);
+            console.log(event.target.innerText);
+          }}
+        >
           {letter}
         </div>
       ))}

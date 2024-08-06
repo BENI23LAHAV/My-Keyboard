@@ -5,9 +5,8 @@ const Letter = (props) => {
   const color = props.color;
   const fontSize = props.fontSize;
 
-  return <p style={{ color: color, fontSize: fontSize }}>{letter}</p>;
+  return <span style={{ color: color, fontSize: `${fontSize}px` }}>{letter}</span>;
 };
 
 export default Letter;
-
 
