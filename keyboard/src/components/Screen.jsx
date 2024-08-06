@@ -1,10 +1,7 @@
-import { useState } from "react";
+import React from "react";
 
-/**-----------Screen----------- */
-const x = "Itamerrrrrrrrrrrrrrrr";
-const Screen = (props) => {
-  const [screen, setScreen] = useState("");
-  return <div id="screen">{screen}</div>;
+const Screen = () => {
+  return <div>Screen</div>;
 };
 
 export default Screen;
