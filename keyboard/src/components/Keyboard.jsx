@@ -31,7 +31,7 @@ const English = [
   "x",
   "y",
   "z",
-  "_",
+ " ",
 ];
 const Hebrew = [
   "א",
@@ -83,7 +83,7 @@ const KeyBord = (props) => {
           className="letter"
           onClick={(event, color, fontSize) => {
             createLetter2(event.target.innerText, color, fontSize);
-            console.log(event.target.innerText);
+            // console.log(event.target.innerText);
           }}
         >
           {letter}
