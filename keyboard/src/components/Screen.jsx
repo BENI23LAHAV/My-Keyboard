@@ -6,12 +6,7 @@ let counter = 0;
 const history = [];
 const Screen = () => {
   const [message, setMessage] = useState([]);
-  function createNewLetter(
-    letter,
-    color = "purple",
-    fontSize = "26",
-    upper,
-  ) {
+  function createNewLetter(letter, color = "purple", fontSize = "26", upper) {
     setMessage((old) => [
       ...old,
       <Letter
@@ -24,19 +19,21 @@ const Screen = () => {
     ]);
     history.push(message);
   }
-  // console.log(history);
+  function clear() {
+    setMessage([]);
+    history.push([...message]);
+  }
   function undo() {
     setMessage(history[history.length - 1]);
     history.pop();
   }
   function del() {
     setMessage((old) => {
-      history.push([...old]);   //   need to understand way it need the three points here 
+      history.push([...old]); //   need to understand why it needs the three points here
       old.pop();
       console.log(old);
       return [...old];
     });
-    // history.push(message);
   }
   return (
     <div className="page">
@@ -47,6 +44,7 @@ const Screen = () => {
         showLetter={createNewLetter}
         del={del}
         undo={undo}
+        clear={clear}
       />
     </div>
   );
