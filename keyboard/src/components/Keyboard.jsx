@@ -1,8 +1,7 @@
-
-import React, { useReducer }from "react";
+import React, { useReducer, useState } from "react";
 // import Letter from "./Letter";
 import "./keyStyle.css";
-
+import languages from "./languages";
 /** ----------Our supported languages--------------- */
 const English = [
   "a",
@@ -31,7 +30,7 @@ const English = [
   "x",
   "y",
   "z",
- " ",
+  " ",
 ];
 const Hebrew = [
   "א",
@@ -63,6 +62,7 @@ const Hebrew = [
   "ץ",
   " ",
 ];
+
 /**------------Createing letter & push it into Screen---------- */
 // function createLetter(letter, color, fontSize) {
 //   const what = <Letter letter={letter} color={color} fontSize={fontSize} />;
@@ -70,18 +70,23 @@ const Hebrew = [
 let upper = false;
 /**-----------Keyboard component-------------------------- */
 const KeyBord = (props) => {
-  const [, forceUpdate] = useReducer(x => x + 1, 0);
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
   const createLetter = props.showLetter;
-  
+
   // let color = "black";
   // let fontSize = "20";
-  let language = props.lenguege === "English" ? English : Hebrew;
-const undo = props.undo;
-const del = props.del;
-const toggleUpper = ()=> {
-  upper = !upper;
-  forceUpdate();
-}
+  // let language = languages();
+  const [language, setLanguage] = useState(languages());
+  function changeLanguage(value) {
+    // console.log(languages(value));
+    setLanguage(languages(value));
+  }
+  const undo = props.undo;
+  const del = props.del;
+  const toggleUpper = () => {
+    upper = !upper;
+    forceUpdate();
+  };
   return (
     <div id="keyboard">
       {language.map((letter) => (
@@ -91,16 +96,22 @@ const toggleUpper = ()=> {
           onClick={(event, color, fontSize) => {
             createLetter(event.target.innerText, color, fontSize, upper);
             // console.log(event.target.innerText);
-          }}
-        >
+          }}>
           {letter}
         </div>
       ))}
-     <button onClick={undo}>undo</button>
-     <button onClick={del}>delete</button>    
-     <button  className={upper? "upper":""} onClick={toggleUpper}>upper</button>
-     
-     </div>
+      <button onClick={undo}>undo</button>
+      <button onClick={del}>delete</button>
+      <button className={upper ? "upper" : ""} onClick={toggleUpper}>
+        upper
+      </button>
+      <select onChange={(event) => changeLanguage(event.target.value)}>
+        <option value="English">English</option>
+        <option value="Hebrew">Hebrew</option>
+        <option value="Characters">Characters</option>
+        <option value="Emojis">Emojis</option>
+      </select>
+    </div>
   );
 };
 
