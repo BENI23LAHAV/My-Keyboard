@@ -1,6 +1,6 @@
-import React from "react";
-import Letter from "./Letter";
-import Screen from "./Screen";
+
+import React, { useReducer }from "react";
+// import Letter from "./Letter";
 import "./keyStyle.css";
 
 /** ----------Our supported languages--------------- */
@@ -64,32 +64,43 @@ const Hebrew = [
   " ",
 ];
 /**------------Createing letter & push it into Screen---------- */
-function createLetter(letter, color, fontSize) {
-  const what = <Letter letter={letter} color={color} fontSize={fontSize} />;
-}
+// function createLetter(letter, color, fontSize) {
+//   const what = <Letter letter={letter} color={color} fontSize={fontSize} />;
+// }
+let upper = false;
 /**-----------Keyboard component-------------------------- */
 const KeyBord = (props) => {
-  const createLetter2 = props.showLetter;
-
-  let color = "black";
-  let fontSize = "20";
-  let lenguege = props.lenguege === "English" ? English : Hebrew;
-
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
+  const createLetter = props.showLetter;
+  
+  // let color = "black";
+  // let fontSize = "20";
+  let language = props.lenguege === "English" ? English : Hebrew;
+const undo = props.undo;
+const del = props.del;
+const toggleUpper = ()=> {
+  upper = !upper;
+  forceUpdate();
+}
   return (
     <div id="keyboard">
-      {lenguege.map((letter) => (
+      {language.map((letter) => (
         <div
           key={letter}
           className="letter"
           onClick={(event, color, fontSize) => {
-            createLetter2(event.target.innerText, color, fontSize);
+            createLetter(event.target.innerText, color, fontSize, upper);
             // console.log(event.target.innerText);
           }}
         >
           {letter}
         </div>
       ))}
-    </div>
+     <button onClick={undo}>undo</button>
+     <button onClick={del}>delete</button>    
+     <button  className={upper? "upper":""} onClick={toggleUpper}>upper</button>
+     
+     </div>
   );
 };
 
