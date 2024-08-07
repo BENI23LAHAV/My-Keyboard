@@ -28,6 +28,7 @@ const KeyBord = (props) => {
   const undo = props.undo;
   const del = props.del;
   const clear = props.clear;
+  const upperAllFunc = props.upperAllFunc;
   const toggleUpper = () => {
     upper = !upper;
     forceUpdate();
@@ -46,10 +47,11 @@ const KeyBord = (props) => {
       ))}
       <button onClick={undo}>undo</button>
       <button onClick={del}>delete</button>
-      <button onClick={clear}>clear</button>
+      <button onClick={clear}>clear All</button>
       <button className={upper ? "upper" : ""} onClick={toggleUpper}>
         upper
       </button>
+      <button onClick={upperAllFunc}>upperAllFunc</button>
       <input
         type="number"
         min={10}

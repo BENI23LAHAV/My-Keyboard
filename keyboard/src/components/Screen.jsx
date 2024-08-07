@@ -4,8 +4,10 @@ import KeyBord from "./Keyboard.jsx";
 let counter = 0;
 
 const history = [];
+
 const Screen = () => {
   const [message, setMessage] = useState([]);
+  const [upperAll, setUpperAll] = useState(false);
   function createNewLetter(letter, color = "purple", fontSize = "26", upper) {
     setMessage((old) => [
       ...old,
@@ -18,6 +20,16 @@ const Screen = () => {
       />,
     ]);
     history.push(message);
+  }
+  function upperAllFunc() {
+    setUpperAll(!upperAll);
+    if (upperAll) {
+      setMessage(message.map((item) => item.props.letter.toUpperCase())); //needs to fix it, right now it returs a different array that not a letter element
+    } else {
+      setMessage(message.map((item) => item.props.letter.toLowerCase()));
+    }
+    history.push([...message]);
+    console.log(message);
   }
   function clear() {
     setMessage([]);
@@ -35,6 +47,7 @@ const Screen = () => {
       return [...old];
     });
   }
+
   return (
     <div className="page">
       <h2>Screen</h2>
@@ -45,6 +58,7 @@ const Screen = () => {
         del={del}
         undo={undo}
         clear={clear}
+        upperAllFunc={upperAllFunc}
       />
     </div>
   );
