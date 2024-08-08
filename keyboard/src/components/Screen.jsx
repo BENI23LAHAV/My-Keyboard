@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import Letter from "./Letter.jsx";
 import KeyBord from "./Keyboard.jsx";
 let counter = 0;
-
+/**--------------Our history array-------------- */
 const history = [];
-
+/**---------------Our screen component---------- */
 const Screen = () => {
+  /**--------------Use states ------------------ */
   const [message, setMessage] = useState([]);
   const [upperAll, setUpperAll] = useState(false);
+
+  /** -------------Props functions-------------- */
   function createNewLetter(letter, color = "purple", fontSize = "26", upper) {
     setMessage((old) => [
       ...old,
@@ -21,16 +24,41 @@ const Screen = () => {
     ]);
     history.push(message);
   }
+
   function upperAllFunc() {
-    setUpperAll(!upperAll);
-    if (upperAll) {
-      setMessage(message.map((item) => item.props.letter.toUpperCase())); //needs to fix it, right now it returs a different array that not a letter element
-    } else {
-      setMessage(message.map((item) => item.props.letter.toLowerCase()));
-    }
-    history.push([...message]);
-    console.log(message);
+    setUpperAll((old) => {
+      const newUpperAll = !old;
+      console.log(old, newUpperAll);
+      setMessage((prevMessage) => {
+        return prevMessage.map((item, index) => {
+          if (newUpperAll) {
+            return (
+              <Letter
+                key={index}
+                upper={newUpperAll}
+                letter={item.props.letter}
+                color={item.props.color}
+                fontSize={item.props.fontSize}
+              />
+            );
+          } else {
+            return (
+              <Letter
+                key={index}
+                upper={newUpperAll}
+                letter={item.props.letter}
+                color={item.props.color}
+                fontSize={item.props.fontSize}
+              />
+            );
+          }
+        });
+      });
+      history.push([...message]);
+      return newUpperAll;
+    });
   }
+
   function clear() {
     setMessage([]);
     history.push([...message]);
@@ -47,7 +75,7 @@ const Screen = () => {
       return [...old];
     });
   }
-
+  /**--------------The component returning----------- */
   return (
     <div className="page">
       <h2>Screen</h2>

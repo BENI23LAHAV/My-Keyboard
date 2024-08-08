@@ -1,7 +1,7 @@
 #keyboard {
   display: grid;
   grid-template-columns: repeat(10, 1fr); /* מספר העמודות בהתאם לצורך */
-  grid-template-rows: repeat(3, auto); /* 3 שורות */
+  grid-template-rows: repeat(4, auto); /* 3 שורות */
   gap: 5px;
   padding: 10px;
 }
@@ -24,6 +24,8 @@
   background-color: #f0f0f0;
   font-size: 16px;
 }
+.special {
+}
 .upper {
   background-color: #bebebe;
 }
@@ -33,6 +35,4 @@ p {
   min-width: 400px;
   background-color: #d8d7d7;
   max-width: 500px;
-  
-  
 }
